@@ -34,7 +34,7 @@ function signUpPage() {
         dictionary.loginPage.passwordTextBox.sendKeys(dictionary.signUpPage.userPassword);
         dictionary.signUpPage.termsAndConditionsCheckBox.click();
         dictionary.loginPage.loginOrSignUpButton.click();
-        browser.sleep(400);
+        browser.sleep(2000);
         dictionary.dataDictionary.waitForElement(dictionary.signUpPage.nameTextBox);
 
     }

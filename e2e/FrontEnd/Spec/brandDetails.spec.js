@@ -1,21 +1,18 @@
 let brandDetailsPage = require('../PageObject/brandDetails_po');
 let commonActions = require('../../../Common/CommonActions');
-let clearData = require('../../ClearData/clearAutomationData');
 let dictionary = require ('../../../Utils/DataFile.js');
 let loginPage = require('../PageObject/login_po');
 let fakeData = require('../../../Utils/FakeData.js');
 
 describe('Verify brand details screen!', function () {
     beforeAll(function (done) {
-        browser.sleep(4000);
+
         expect(browser.getCurrentUrl()).toContain('brands/create');
-            done();
+        // dictionary.dataDictionary.waitForElement(dictionary.dataDictionary.brandDropDownOption);
+        // dictionary.dataDictionary.brandDropDownOption.click();
+        // dictionary.dataDictionary.createBrand.click();
+        done();
     });
-    // beforeEach(function () {
-    //     browser.get(browser.params.Url);
-    //     browser.waitForAngular()
-    //
-    // });
 
     afterAll(function () {
 
@@ -25,36 +22,35 @@ describe('Verify brand details screen!', function () {
         // clearData.currentSessionDataClear();
         // clearData.deleteUser(browser.params.gmailAddress);
 
-
     });
 
-    it('Verify that initially Continue button is disabled', () => {
-        expect(dictionary.brandDetails.continueButton.isDisabled).toBe(dictionary.brandDetails.continueButton.isDisabled);
-        browser.logger.info("Continue button is disabled until all fields are filled!")
-    });
-
-
-    it('Verify existing brand error', () => {
-        brandDetailsPage.fillBrandDetails(dictionary.dataDictionary.existingBrand, fakeData.randomFirstName + '.com', '@' + fakeData.randomFirstName);
-        dictionary.dataDictionary.waitForElement(dictionary.brandDetails.errorOnBrandDetail);
-        browser.logger.info("Brand already exists!")
-
-
-    });
-
-    it('Verify error on entering invalid brand website', () => {
-        brandDetailsPage.fillBrandDetails(fakeData.randomFirstName, fakeData.randomFirstName, '@' + fakeData.randomFirstName);
-        dictionary.dataDictionary.waitForElement(dictionary.brandDetails.errorOnBrandDetail);
-        browser.logger.info("User entered invalid website name")
-
-    });
-
-    it('Verify that Continue button enables only when all mandatory fields are filled', () => {
-        brandDetailsPage.fillBrandDetails(fakeData.randomFirstName,'','@' + fakeData.randomFirstName);
-        expect(dictionary.brandDetails.continueButton.isDisabled).toBe(dictionary.brandDetails.continueButton.isDisabled);
-        browser.logger.info("Continue button is disabled until an mandatory fields are filled!")
-
-    });
+    // it('Verify that initially Continue button is disabled', () => {
+    //     expect(dictionary.brandDetails.continueButton.isDisabled).toBe(dictionary.brandDetails.continueButton.isDisabled);
+    //     browser.logger.info("Continue button is disabled until all fields are filled!")
+    // });
+    //
+    //
+    // it('Verify existing brand error', () => {
+    //     brandDetailsPage.fillBrandDetails(dictionary.dataDictionary.existingBrand, fakeData.randomFirstName + '.com', '@' + fakeData.randomFirstName);
+    //     dictionary.dataDictionary.waitForElement(dictionary.brandDetails.errorOnBrandDetail);
+    //     browser.logger.info("Brand already exists!")
+    //
+    //
+    // });
+    //
+    // it('Verify error on entering invalid brand website', () => {
+    //     brandDetailsPage.fillBrandDetails(fakeData.randomFirstName, fakeData.randomFirstName, '@' + fakeData.randomFirstName);
+    //     dictionary.dataDictionary.waitForElement(dictionary.brandDetails.errorOnBrandDetail);
+    //     browser.logger.info("User entered invalid website name")
+    //
+    // });
+    //
+    // it('Verify that Continue button enables only when all mandatory fields are filled', () => {
+    //     brandDetailsPage.fillBrandDetails(fakeData.randomFirstName,'','@' + fakeData.randomFirstName);
+    //     expect(dictionary.brandDetails.continueButton.isDisabled).toBe(dictionary.brandDetails.continueButton.isDisabled);
+    //     browser.logger.info("Continue button is disabled until an mandatory fields are filled!")
+    //
+    // });
 
     it('Verify that Continue button enables only when all mandatory fields are filled', () => {
         brandDetailsPage.fillBrandDetails(fakeData.randomFirstName, fakeData.randomFirstName + '.com', '@' + fakeData.randomFirstName);

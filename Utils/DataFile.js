@@ -5,9 +5,11 @@ exports.dataDictionary = {
     brandsUrl: "https://api-staging.catalog.cc/admin/brand/brand/",
     contentRequestsUrl: "https://api-staging.catalog.cc/admin/content/contentrequest/",
     userUrl : 'https://api-staging.catalog.cc/admin/user/user/',
-    homeUrl : "https://staging.catalog.cc/",
+    homeUrl : "http://staging.catalog.cc",
+    loginUrl: "https://staging.catalog.cc/auth/login",
     adminEmail: "development@unityinfluence.com",
-    adminPassword: "unityinfluence",
+    adminPassword: "D3v3l0pm3nt",
+    adminLogOut : $('a:nth-child(5)'),
     existingBrand: "Automation Brand : Do not Touch",
     existingBrandId: "401",
     orderTypeForPaymentReceived: "1",
@@ -16,10 +18,13 @@ exports.dataDictionary = {
     unPaidContentRequest: "999",
     saveAndContinueButton : $('input[type="submit"]:nth-child(4)'),
     saveButton : $('input[type="submit"]:nth-child(3)'),
+    save : $('#user_form > div > div > input.default'),
     status1: "Un-published",
     status2: "Free",
     status3: "Available",
     status4: "Purchased with the request",
+    brandAdmin: "brijesh.kumar@quovantis.com",
+    brandPassword: "12345678",
 
     //Common page elements
     searchTextBox : $('#searchbar'),
@@ -33,6 +38,24 @@ exports.dataDictionary = {
     passwordTextBox : element(by.id('id_password')),
     loginButton : element(by.xpath('.//*[@type=\'submit\']')),
     contentOnAdminHome : $('#content-main'),
+
+    //Tenant page
+    headerOnTenantPage : element(by.cssContainingText('#content > h1', 'Add tenant')),
+    tenantNameTextField : $("#id_name"),
+    tenantName : 'Automation Tenant',
+
+    //User page
+    headerOnUserPage : element(by.cssContainingText('#content > h1', 'Add user')),
+    firstNameTextField : $("#id_first_name"),
+    firstName : "Parul Automation",
+    emailTextField : $("#id_email"),
+    passwordTextField : $("#id_password1"),
+    confirmPasswordTextField : $("#id_password2"),
+    tenantDropDown : $("#select2-id_tenant-container"),
+    searchTenant : $("[class='select2-search__field']"),
+    searchResult : $("[class*='select2-results__option--highlighted']"),
+    searchResultUserListing : $('th > a'),
+    adminAccessFlag : $('#id_admin_access'),
 
     //Brand listing page
     brandsLink : $('tr.model-brand > th > a'),
@@ -84,9 +107,13 @@ exports.dataDictionary = {
     orderID : $('div.form-row.field-id > div > div'),
 
     //Content Library (front-end)
-    brandDropDownOnFrontEnd : $('#multiBrandDropdown'),
+    brandDropDownOnFrontEnd : $('app-searchable-dropdown > div > button'),
+    closeDownloadDrawer : $('app-download-drawer > div > span'),
+    originalImage : $('div:nth-child(1) > label > span.checkmark-text.source-san'),
+    imageThumbnail : $('ngxmasonryitem > img'),
+    downloadImage : $('div.lightbox-information-action > button > span.icon-download-content'),
     contentComponent : $('ngx-masonry > ngxmasonryitem:nth-child(1) > div'),
-    freeTag : $("[class*='status-tag free text-center source-san-semi']"),
+    freeTag : $('div.status-tag.text-center.source-san-semi.animated.delay-2s.fadeIn.free'),
     freeContentId : $('ngxmasonryitem:nth-child(1) > div > div.overlay-metadata > p'),
     availableContentId : $('ngxmasonryitem:nth-child(2) > div > div.overlay-metadata > p'),
     downloadedContentID : $('ngxmasonryitem:nth-child(3) > div > div > p'),
@@ -94,6 +121,34 @@ exports.dataDictionary = {
     addToCart : $("[class*='brick-action brick-action-add']"),
     contentCategory : $("[class*='content-category rubik-semibold']"),
     contentId : $("[class*='content-code source-san']"),
+    brandDropDownOption :  $("[class*='dropdown-trigger rubik-semibold d-block']"),
+    createBrand : $("[class*='static-area-item d-block w-100']"),
+    searchForBrand : $('div.search-area.source-san.position-relative > input'),
+    brandNameToSearch : 'Verlie',
+    filteredResult : $('div.listing-area.source-san-semi.position-relative > button'),
+    filterButton : $("[class*='btn filter-btn']"),
+    applyFilter : $('div.filter-list-btn.align-items-center > button.app-default-button'),
+    contentID : $('ngxmasonryitem:nth-child(1) > div.grid-brick-overlay.align-items-end.justify-content-between.animated.slideInUp > div.overlay-metadata > p'),
+    clearFilter : $("[class*='filter-options-clear']"),
+    zoomIcon : $('span.icon-zoom'),
+
+    returnImageOnLibrary : function(index){
+        imageThumbnail = $("ngxmasonryitem:nth-child(" + index + ")");
+        return imageThumbnail;
+    },
+
+
+    returnContentID : function(index) {
+        contentID = $('ngxmasonryitem:nth-child(' + 1 + ') > div.grid-brick-overlay.align-items-end.justify-content-between.animated.slideInUp > div.overlay-metadata > p');
+        return contentID;
+    },
+
+    returnFilterOptions : function(filter) {
+        filterOption = element(by.cssContainingText('[class="checkmark-name"]', filter));
+        return filterOption;
+    },
+
+
 
     //Function to get different admin URLs based on screens
     getAdminUrl: function (type) {
@@ -176,7 +231,7 @@ exports.dataDictionary = {
 
     getBrandUrl: function (type) {
         switch (type) {
-            case 'home': browser.get(brandUrl.home);
+            case 'home': browser.get("https:/staging.catalog.cc/home");
                 break;
 
             case 'login': browser.get(brandUrl.login);
@@ -194,7 +249,7 @@ exports.dataDictionary = {
 
 exports.brandUrl = {
 
-     home : "https://staging.catalog.cc/home",
+     home : "staging.catalog.cc/home",
 
 
 };
@@ -219,15 +274,18 @@ exports.signUpPage = {
     signUpButtonOnHome : $('div.hero-primary-action.text-center > a'),
     headingText : "Create an account",
     nameTextBox : $("input[formcontrolname*='name']"),
+    getPhotosButton : $('li:nth-child(2) > a > button'),
     termsAndConditionsCheckBox : $('label > span'),
     existingUser: 'parul.adhikari@quovantis.com',
-    userPassword : 'Qwerty@123',
-    invalidPasswordError : element(by.cssContainingText('[class*="abcerror-dialogue source-san"]', 'Please make sure you follow the guidelines.')),
+    userPassword : '12345678',
+    invalidPasswordError : element(by.cssContainingText('[class*="error-dialogue source-san"]', 'Please make sure you follow the guidelines.')),
     existingUserError : element(by.cssContainingText('[class*="error-dialogue source-san"]', 'Sorry! User with this email already exists!')),
 };
 
 exports.brandDetails = {
 
+    contactUs : $("[class='contact-options-open']"),
+    closeContactUs : $('div.text-right.contact-options-toggle-wrapper > div'),
     userProfileDropDown : $('div.brand-image'),
     signOutOption : $('a > div'),
     websiteName : $("input[formcontrolname*='website']"),
@@ -245,6 +303,8 @@ exports.shotScreen = {
     continueOnShots : $('div.shot-selection-action.text-center > div > button'),
     productTextBox : $('#name > div > ul > li > input'),
     crossOnProductTag : $("[class*='ui-chips-token-icon fa fa-fw fa-close']"),
+    //allshots : div:nth-child(7) > div > div.shot-card-details > div > div.row.no-gutters.align-items-top > div.col-6.text-right > div > button.toggle-plus > span
+
     shotPlus1 : $('div:nth-child(1) > div > div.shot-card-details > div > div.row.no-gutters.align-items-top > div.col-6.text-right > div > button.toggle-plus > span'),
     shotPlus2 : $('div:nth-child(4) > div > div.shot-card-details > div > div.row.no-gutters.align-items-top > div.col-6.text-right > div > button.toggle-plus > span'),
     shotMinus : $('div:nth-child(1) > div > div.shot-card-details > div > div.row.no-gutters.align-items-top > div.col-6.text-right > div > button.toggle-minus > span'),
@@ -282,8 +342,9 @@ exports.gmail = {
     gmailPasswordTextBox : $('input[type="password"]'),
     passwordNextButton : $('#passwordNext'),
     gmailEmail : 'quovantis1@gmail.com',
-    gmailPassword: 'quovantis@123'
+    gmailPassword: 'quovantis@123',
 };
+
 
 
 

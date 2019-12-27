@@ -3,13 +3,12 @@ let EC = protractor.ExpectedConditions;
 
 function adminLoginPage() {
 
-    this.adminLogin = function () {
+    this.adminLogin = function (email, password) {
         dictionary.dataDictionary.waitForElement(dictionary.dataDictionary.emailTextBox);
-        dictionary.dataDictionary.emailTextBox.sendKeys(dictionary.dataDictionary.adminEmail);
-        dictionary.dataDictionary.passwordTextBox.sendKeys(dictionary.dataDictionary.adminPassword);
+        dictionary.dataDictionary.emailTextBox.sendKeys(email);
+        dictionary.dataDictionary.passwordTextBox.sendKeys(password);
         dictionary.dataDictionary.loginButton.click();
-        // expect(this.getContentOnAdminHome().isPresent()).toBe(true);
-        browser.logger.info('Admin is successfully logged in through ' + dictionary.dataDictionary.adminEmail + '| ' + dictionary.dataDictionary.adminPassword);
+        browser.logger.info('Admin is successfully logged in through ' + email);
     };
 }
 

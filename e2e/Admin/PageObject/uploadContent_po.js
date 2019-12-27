@@ -1,5 +1,5 @@
 let path = require('path');
-let dirnameFile = '/home/parul/catalog_auto/catalog-automation/Images/';
+let dirnameFile = '/var/lib/jenkins/workspace/automation-suite/Images/';
 let remote = require('../../../node_modules/selenium-webdriver/remote');
 browser.setFileDetector(new remote.FileDetector());
 let dictionary = require ('../../../Utils/DataFile.js');

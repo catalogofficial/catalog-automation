@@ -1,17 +1,18 @@
 let homePage = require('../PageObject/home_po');
 let dictionary = require ('../../../Utils/DataFile.js');
+let common = require('../../../Utils/common')
 
 
 describe('Verify catalog home page', function () {
 
     beforeAll(function (done) {
         browser.logger.info('Loading catalog home page');
-        dictionary.dataDictionary.getBrandUrl('home');
+        common.getAdminUrl('brand-home')
         done();
     });
 
     afterAll(function () {
-        dictionary.signUpPage.signUpButtonOnHome.click();
+        dictionary.signUpPage.getPhotosButton.click();
     });
 
     it('Verify login button on home page', function () {

@@ -10,7 +10,7 @@ describe('Verify deletion of all automated data created!', function () {
         dictionary.dataDictionary.getAdminUrl('admin');
         browser.isElementPresent(dictionary.dataDictionary.emailTextBox).then( function (result) {
             if (result) {
-                adminLoginPage.adminLogin();
+                adminLoginPage.adminLogin(dictionary.dataDictionary.adminEmail, dictionary.dataDictionary.adminPassword);
             };
         });
         done();
@@ -18,12 +18,7 @@ describe('Verify deletion of all automated data created!', function () {
 
 
     afterAll(function() {
-        browser.getAllWindowHandles().then(function (handles) {
-            browser.driver.close();
-            browser.switchTo().window(handles[0]);
-            browser.driver.close();
-
-        });
+        browser.driver.close();
 
     });
 

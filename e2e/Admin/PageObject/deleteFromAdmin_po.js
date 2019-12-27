@@ -6,21 +6,21 @@ function deleteData() {
 
     this.deleteUser = function (User) {
         dictionary.dataDictionary.getAdminUrl('user');
-        browser.isElementPresent(dictionary.dataDictionary.emailTextBox).then( function (result) {
-            if (result) {
-                adminLoginPage.adminLogin();
-            };
-        });
+        // browser.isElementPresent(dictionary.dataDictionary.emailTextBox).then( function (result) {
+        //     if (result) {
+        //         adminLoginPage.adminLogin();
+        //     };
+        // });
         this.deleteData(User);
     };
 
     this.deleteBrand=function (Brand) {
         dictionary.dataDictionary.getAdminUrl('brands');
-        browser.isElementPresent(dictionary.dataDictionary.emailTextBox).then( function (result) {
-            if (result) {
-                adminLoginPage.adminLogin();
-            };
-        });
+        // browser.isElementPresent(dictionary.dataDictionary.emailTextBox).then( function (result) {
+        //     if (result) {
+        //         adminLoginPage.adminLogin();
+        //     };
+        // });
         this.deleteData(Brand);
     };
 

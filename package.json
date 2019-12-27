@@ -4,14 +4,21 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "faker": "^4.1.0",
+    "js-yaml": "^3.13.1",
     "log4js": "^4.0.2",
+    "mysql": "^2.17.1",
     "nodemailer": "^5.1.1",
+    "pg": "^7.10.0",
     "protractor": "^5.4.2",
     "protractor-jasmine2-html-reporter": "^0.0.7",
-    "faker": "^4.1.0",
-    "sg-protractor-tools": "^1.0.4"
+    "sg-protractor-tools": "^1.0.4",
+    "window": "^4.2.6",
+    "xmlhttprequest": "^1.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "html-dnd": "^1.2.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +31,6 @@
   "bugs": {
     "url": "https://github.com/parul-adhikari/catalog-automation/issues"
   },
-  "homepage": "https://github.com/parul-adhikari/catalog-automation#readme"
+  "homepage": "https://github.com/parul-adhikari/catalog-automation#readme",
+  "postinstall": "cd ./node_modules/gulp-protractor && npm i webdriver-manager@12.1.6 && cd ../../ && ./node_modules/.bin/webdriver-manager update --gecko=false"
 }

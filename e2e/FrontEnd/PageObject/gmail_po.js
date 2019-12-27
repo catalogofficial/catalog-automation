@@ -11,7 +11,7 @@ function gmailPage() {
     }
 
     this.registerWithGmail = function (email, password) {
-        dictionary.gmail.continueWithGmailButton.click();
+        // dictionary.gmail.continueWithGmailButton.click();
         dictionary.gmail.gmailTextBox.sendKeys(email);
         dictionary.gmail.gmailNextButton.click();
         dictionary.dataDictionary.waitForElement(dictionary.gmail.gmailPasswordTextBox);

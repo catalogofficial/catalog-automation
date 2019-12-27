@@ -1,10 +1,8 @@
-let clearData = require('../../ClearData/clearAutomationData');
 let dictionary = require ('../../../Utils/DataFile.js');
 
 
 describe('Verify selecting channels for a brand', function () {
     beforeAll(function (done) {
-        browser.sleep(4000);
         expect(browser.getCurrentUrl()).toContain('order/channel');
         done();
     });
@@ -22,14 +20,10 @@ describe('Verify selecting channels for a brand', function () {
     });
 
 
-    it('Verify by selecting a channel', () => {
-        dictionary.brandDetails.channelSelection1.click();
-        browser.logger.info("Selected a channel")
-
-    });
-
     it('Verify by selecting multiple channels', () => {
-        dictionary.brandDetails.channelSelection2.click();
+        for(i=1; i<7; i++){
+            $('div:nth-child(' + i + ') > label > div').click();
+        }
         browser.logger.info("Selected multiple channels");
         dictionary.brandDetails.continueButton.click();
 
